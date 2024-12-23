@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://u767kolwcnki"]
+
+[ext_resource type="Script" path="res://render/scripts/mbutton.gd" id="1_tsphy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dhxje"]
+font_size = 100
+
+[node name="MainMenu" type="CanvasLayer"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "CANAVAR"
+label_settings = SubResource("LabelSettings_dhxje")
+horizontal_alignment = 1
+
+[node name="StartGame" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Start Game"
+flat = true
+script = ExtResource("1_tsphy")
+signal_name = "start_game"
+
+[node name="Options" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Options"
+flat = true
+script = ExtResource("1_tsphy")
+signal_name = "options"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Quit"
+flat = true
+script = ExtResource("1_tsphy")
+signal_name = "quit"

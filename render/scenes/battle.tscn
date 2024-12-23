@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl45tal7cm2og"]
+
+[ext_resource type="Script" path="res://render/scripts/battle_view.gd" id="1_0iv5l"]
+[ext_resource type="Script" path="res://render/scripts/board.gd" id="2_eenox"]
+
+[node name="Battle" type="Node2D"]
+script = ExtResource("1_0iv5l")
+
+[node name="Characters" type="Node2D" parent="."]
+
+[node name="Board" type="Node2D" parent="."]
+position = Vector2(293, 172)
+script = ExtResource("2_eenox")

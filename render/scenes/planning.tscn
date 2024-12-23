@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bslt8mihljcyq"]
+
+[ext_resource type="Script" path="res://scripts/planning.gd" id="1_6b01t"]
+[ext_resource type="Script" path="res://scripts/mbutton.gd" id="5_ivm1d"]
+
+[node name="Planning" type="Node2D"]
+script = ExtResource("1_6b01t")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+offset_top = 7.0
+offset_right = 1918.0
+offset_bottom = 1071.0
+
+[node name="MButton" type="Button" parent="."]
+offset_left = 1118.0
+offset_top = 913.0
+offset_right = 1215.0
+offset_bottom = 944.0
+text = "Start Battle"
+script = ExtResource("5_ivm1d")
+signal_name = "start_battle"

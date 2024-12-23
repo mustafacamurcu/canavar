@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://f6x2c5prmrhu"]
+
+[ext_resource type="Texture2D" uid="uid://dufk732myqnc" path="res://assets/warrior.png" id="1_c16aw"]
+[ext_resource type="Script" path="res://scripts/character_in_list.gd" id="1_dmiy3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kvjxl"]
+font_size = 75
+
+[node name="CharacterInList" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dmiy3")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_c16aw")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Warrior"
+label_settings = SubResource("LabelSettings_kvjxl")

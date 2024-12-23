@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpb42sg020js0"]
+
+[ext_resource type="Texture2D" uid="uid://ds52nsb6v4hh7" path="res://assets/circle.png" id="1_dnlne"]
+[ext_resource type="Script" path="res://scripts/icon.gd" id="1_ucost"]
+
+[node name="Icon" type="Node2D"]
+script = ExtResource("1_ucost")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("1_dnlne")
+
+[node name="Icon" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(0.65, 0.65)
