@@ -1,9 +1,9 @@
 extends Node2D
 
 enum {
-  Monster,
-  Event,
-  Farm
+	Monster,
+	Event,
+	Farm
 }
 
 var attack_speed = 1

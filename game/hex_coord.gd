@@ -6,44 +6,7 @@ extends Resource
 
 const EDGE_SIZE = 100
 
-var col
-var row
-
-func _init(x, y):
-	col = x
-	row = y
-
-static func from_vector2i(coord: Vector2i):
-	return Coord.new(coord.x, coord.y)
-
-func _to_string():
-	return '(' + str(col) + ', ' + str(row) + ')'
-
-func add(other: Coord):
-	return Coord.new(col + other.col, row + other.row)
-
-func directions():
-	return [
-		Coord.new(2, 0),
-		Coord.new(1, -1),
-		Coord.new(-1, -1),
-		Coord.new(-2, 0),
-		Coord.new(-1, 1),
-		Coord.new(1, 1)]
-
-func neighbors():
-	var n = []
-	for dir in directions():
-		n.append(self.add(dir))
-	return n
-
-func to_position() -> Vector2:
-	var x = EDGE_SIZE * sqrt(3) / 2 * col
-	var y = EDGE_SIZE * 3.0 / 2 * row
-	return Vector2(x, y)
-
-func edge_lines():
-	var corners = [
+const CORNER_OFFSETS = [
 		Vector2(0, -1),
 		Vector2(sqrt(3) / 2, -0.5),
 		Vector2(sqrt(3) / 2, 0.5),
@@ -51,10 +14,43 @@ func edge_lines():
 		Vector2(-sqrt(3) / 2, 0.5),
 		Vector2(-sqrt(3) / 2, -0.5),
 	]
+
+const DIRECTIONS = [
+		Vector2i(2, 0),
+		Vector2i(1, -1),
+		Vector2i(-1, -1),
+		Vector2i(-2, 0),
+		Vector2i(-1, 1),
+		Vector2i(1, 1)
+	]
+
+static func neighbors(coord: Vector2i) -> Array[Vector2i]:
+	var n: Array[Vector2i] = []
+	for dir in DIRECTIONS:
+		n.append(coord + dir)
+	return n
+
+static func to_position(coord: Vector2i) -> Vector2:
+	var x = EDGE_SIZE * sqrt(3) / 2 * coord.x
+	var y = EDGE_SIZE * 3.0 / 2 * coord.y
+	return Vector2(x, y)
+
+static func hex_distance(coord: Vector2i, other: Vector2i) -> int:
+	var dcol = abs(coord.x - other.x)
+	var drow = abs(coord.y - other.y)
+	return drow + max(0, (dcol - drow) / 2)
+
+static func corners(coord: Vector2i) -> Array[Vector2]:
+	var cs: Array[Vector2] = []
+	for offset in CORNER_OFFSETS:
+		cs.append(offset * EDGE_SIZE + to_position(coord))
+	return cs
+
+static func edge_lines(coord: Vector2i) -> Array:
+	var cs = corners(coord)
 	var lines = []
-	var pos: Vector2 = to_position()
 	for i in range(6):
-		var start = corners[i] * EDGE_SIZE + pos
-		var end = corners[(i + 1) % 6] * EDGE_SIZE + pos
+		var start = cs[i]
+		var end = cs[(i + 1) % 6]
 		lines.append([start, end])
 	return lines

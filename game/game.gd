@@ -1,28 +1,17 @@
 extends Node
 
-var units: Array[Unit]
+var allies: Array[Unit]
 
-var battle
+var battle: Battle
 
 func _ready() -> void:
 	# create allies
-	for title in ["warrior", "healer", "explorer", "mage"]:
-		var unit: Unit = Unit.new()
-		unit.title = title
-		unit.icon_path = "res://assets/" + title + ".png"
-		units.append(unit)
-
-	# create enemies
-	var enemies: Array[Unit] = []
-	for title in ["tree", "tree", "tree"]:
-		var enemy: Unit = Unit.new()
-		enemy.title = title
-		enemy.icon_path = "res://assets/monster.png"
-		enemies.append(enemy)
+	for title in [Warrior]: # , Warrior, Warrior, Warrior]:
+		var ally: Unit = Warrior.new()
+		allies.append(ally)
 	
-	battle = Battle.new()
-	battle.allies = units
-	battle.enemies = enemies
+	battle = TreeBattle.new()
+	battle.place_allies(allies)
 	battle.battle_ended.connect(_on_battle_ended)
 
 func _process(delta: float) -> void:
@@ -30,9 +19,13 @@ func _process(delta: float) -> void:
 		battle.tick(delta)
 
 func find_target(targeting: Callable) -> Unit:
-	return targeting.call(battle.allies, battle.enemies)
+	if targeting.get_object() in allies:
+		return targeting.call(battle.allies, battle.enemies)
+	else:
+		return targeting.call(battle.enemies, battle.allies)
 
 func _on_battle_ended(isWin: bool):
+	battle.stop()
 	print(isWin)
 
 func _unhandled_key_input(event):

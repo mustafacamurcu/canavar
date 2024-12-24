@@ -51,7 +51,6 @@ func _on_quit_pressed():
 	get_tree().quit()
 
 func _on_escape_pressed():
-	print(scene_stack)
 	if scene_stack.size() > 1:
 		var scene = scene_stack.pop_back()
 		scene.queue_free()
